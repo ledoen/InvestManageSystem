@@ -1,0 +1,45 @@
+﻿<Window x:Class="InvestManageSystem.GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InvestManageSystem.GUI"
+        mc:Ignorable="d"
+        Title="Invest Manage System" Height="720" Width="1080" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="normalTextFont" TargetType="Control">
+            <Setter Property="FontFamily" Value="YouYuan" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0">
+        </Canvas>
+        <TabControl Grid.Row="1" Grid.RowSpan="2" Margin="5,0,5,5">
+            <TabItem Header="数据管理" Name="dataManage" Style="{StaticResource normalTextFont}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="2">
+                        <Button Name="buttonForAddData" Padding="15,5,15,5" Style="{StaticResource normalTextFont}" Click="buttonForAddData_Click">增加数据</Button>
+                        <Label Name="labelForCompany" Margin="20,0,0,0" Style="{StaticResource normalTextFont}" MouseDoubleClick="labelForCompany_MouseDoubleClick">公司</Label>
+                        <ComboBox Name ="comboBoxForCompany" Margin="10,0,10,0" Width="120" Style="{StaticResource normalTextFont}" SelectionChanged="comboBoxForCompany_SelectionChanged"></ComboBox>
+                        <Label Name="labelForReportTime" Margin="20,0,0,0" Style="{StaticResource normalTextFont}" MouseDoubleClick="labelForReportTime_MouseDoubleClick">报告期</Label>
+                        <ComboBox Name ="comboBoxForReportTime" Margin="10,0,10,0" Width="120" Style="{StaticResource normalTextFont}" SelectionChanged="comboBoxForReportTime_SelectionChanged"></ComboBox>
+                    </StackPanel>
+                    <DataGrid Name="dataGridForDisplay" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="报告期" Binding="{Binding ReportTime, StringFormat='yyyy-MM'}" />
+                            <DataGridTextColumn Header="公司" Binding="{Binding CompanyName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="数据分析" Style="{StaticResource normalTextFont}"></TabItem>
+        </TabControl>
+    </Grid>
+</Window>
